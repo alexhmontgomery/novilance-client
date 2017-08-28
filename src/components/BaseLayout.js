@@ -25,7 +25,7 @@ export default class BaseLayout extends Component {
         { this.props.children }
 
         <footer>
-          Insert footer here.
+          {/* Insert footer here. */}
         </footer>
       </div>
     )
