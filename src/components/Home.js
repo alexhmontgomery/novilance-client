@@ -16,7 +16,7 @@ export default class Home extends Component {
                   <p>Develop new skills and get real world experience through freelance work.</p>
                 </div>
               </div>
-              <Link className='home-box-link' to='/project'>Sign up as a Freelancer</Link>
+              <Link className='home-box-link' to='/register'>Sign up as a Freelancer</Link>
             </div>
           </div>
           <div className='home-boxes'>
@@ -29,7 +29,7 @@ export default class Home extends Component {
                   <p>Hire high caliber freelance students at a fraction of the cost of professional freelancers.</p>
                 </div>
               </div>
-              <Link className='home-box-link' to='/freelancer'>Sign up as an Employer</Link>
+              <Link className='home-box-link' to='/register'>Sign up as an Employer</Link>
             </div>
           </div>
         </div>
