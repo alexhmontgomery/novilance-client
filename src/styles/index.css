@@ -147,3 +147,41 @@ main {
   font-weight: 200;
   text-decoration: none;
 }
+
+/*=====REGISTER PAGE=====*/
+#register-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.register-form-box {
+  border: 2px solid black;
+  padding: 0.7em;
+}
+
+.register-form-box form input, form select, button {
+  font-size: 1.2em;
+  margin-top: 0.5em;
+}
+
+/*=====AUTHENTICATE PAGE=====*/
+#authenticate-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.login-form-box {
+  border: 2px solid black;
+  padding: 0.7em;
+}
+
+.login-form-box form input, form select, button {
+  font-size: 1.2em;
+  margin-top: 0.5em;
+}

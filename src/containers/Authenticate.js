@@ -1,21 +1,22 @@
 import React, { Component } from 'react'
+import { startLoading, stopLoading, authenticateUser } from '../actions/index'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-export default class Register extends Component {
+class Authenticate extends Component {
   constructor (props) {
     super(props)
     this.state = {
       selectedRole: 'freelancer', // default is freelancer
       email: '',
       password: '',
-      passwordConf: '',
       redirect: false
     }
 
     this.handleRoleChange = this.handleRoleChange.bind(this)
     this.handleEmailChange = this.handleEmailChange.bind(this)
     this.handlePasswordChange = this.handlePasswordChange.bind(this)
-    this.handlePasswordConfChange = this.handlePasswordConfChange.bind(this)
-    this.handleRegistration = this.handleRegistration.bind(this)
+    this.handleLogin = this.handleLogin.bind(this)
   }
 
   handleRoleChange (event) {
@@ -35,10 +36,11 @@ export default class Register extends Component {
     // TODO: Handle passwords not matching
   }
 
-  handleRegistration (event) {
+  handleLogin (event) {
     event.preventDefault()
+    this.props.startLoading()
 
-    fetch('http://0.0.0.0:5000/register', {
+    fetch('http://0.0.0.0:5000/authenticate', {
       method: 'POST',
       body: JSON.stringify({
         role: this.state.selectedRole,
@@ -52,18 +54,24 @@ export default class Register extends Component {
     .then(r => r.json())
     .then(json => {
       console.log(json)
+      const user = json.user
+      const token = json.token
+      this.props.authenticateUser(user, token)
+    })
+    .then(() => {
+      this.props.stopLoading()
     })
   }
 
   render () {
     return (
-      <main id='register-page' >
+      <main id='authenticate-page' >
         <div>
-          <h1>Sign up to use Novilance as a Freelancer or an employer:</h1>
+          <h1>Login in to your account as a Freelancer or an employer:</h1>
         </div>
 
-        <div className='register-form-box'>
-          <form onSubmit={this.handleRegistration}>
+        <div className='login-form-box'>
+          <form onSubmit={this.handleLogin}>
             <div>
               <select value={this.state.selectedRole} onChange={this.handleRoleChange}>
                 <option value='freelancer'>Freelancer</option>
@@ -79,15 +87,7 @@ export default class Register extends Component {
               <input type='password' onChange={this.handlePasswordChange} placeholder='Your password' value={this.state.password} />
             </div>
 
-            <div>
-              <input type='password' onChange={this.handlePasswordConfChange} placeholder='Confirm your password' value={this.state.passwordConf} />
-            </div>
-
-            <div>
-              <p>Password confirmation errors here</p>
-            </div>
-
-            <button type='submit'>Register</button>
+            <button type='submit'>Login</button>
           </form>
         </div>
 
@@ -95,3 +95,18 @@ export default class Register extends Component {
     )
   }
 }
+
+function mapStateToProps (state) {
+  return {
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({
+    startLoading: startLoading,
+    stopLoading: stopLoading,
+    authenticateUser: authenticateUser
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Authenticate)
