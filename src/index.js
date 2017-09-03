@@ -7,9 +7,13 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import reducers from './reducers'
 import BaseLayout from './components/BaseLayout'
-import Home from './components/Home'
+import Welcome from './components/Welcome'
 import Register from './containers/Register'
 import Authenticate from './containers/Authenticate'
+import FreelancerHome from './containers/FreelancerHome'
+import EmployerHome from './containers/EmployerHome'
+import Project from './containers/Project'
+import ProjectCreate from './containers/ProjectCreate'
 import registerServiceWorker from './registerServiceWorker'
 
 const createStoreWithMiddleware = applyMiddleware()(createStore)
@@ -20,9 +24,13 @@ ReactDOM.render(
     <BrowserRouter>
       <BaseLayout>
         <Switch>
-          <Route exact path='/' component={Home} />
+          <Route exact path='/' component={Welcome} />
           <Route path='/register' component={Register} />
           <Route path='/authenticate' component={Authenticate} />
+          <Route path='/freelancer/home' component={FreelancerHome} />
+          <Route path='/employer/home' component={EmployerHome} />
+          <Route path='/project/new' component={ProjectCreate} />
+          <Route path='/project/:id' component={Project} />
         </Switch>
       </BaseLayout>
     </BrowserRouter>

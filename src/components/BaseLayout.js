@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+// import UserOptions from '../containers/UserOptions'
 import { NavLink } from 'react-router-dom'
 
 export default class BaseLayout extends Component {
@@ -19,6 +20,9 @@ export default class BaseLayout extends Component {
                 <NavLink to='/register'>Sign Up Free</NavLink>
               </div>
             </div>
+            {/* {this.store.state.user.isAuthenticated &&
+              <NavLink to='/logout' className='navbar-horizontal-item'>Logout</NavLink>
+            } */}
           </div>
         </nav>
 

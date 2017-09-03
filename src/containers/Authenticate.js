@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import { startLoading, stopLoading, authenticateUser } from '../actions/index'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -57,6 +58,9 @@ class Authenticate extends Component {
       const user = json.user
       const token = json.token
       this.props.authenticateUser(user, token)
+      this.setState({
+        redirect: true
+      })
     })
     .then(() => {
       this.props.stopLoading()
@@ -64,6 +68,15 @@ class Authenticate extends Component {
   }
 
   render () {
+    if (this.state.redirect === true && this.props.user.userInfo.role === 'freelancer') {
+      return (
+        <Redirect to='/freelancer/home' />
+      )
+    } else if (this.state.redirect === true && this.props.user.userInfo.role === 'employer') {
+      return (
+        <Redirect to='/employer/home' />
+      )
+    }
     return (
       <main id='authenticate-page' >
         <div>
@@ -98,6 +111,7 @@ class Authenticate extends Component {
 
 function mapStateToProps (state) {
   return {
+    user: state.user
   }
 }
 

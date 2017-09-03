@@ -1,6 +1,7 @@
 export const LOADING_START = 'LOADING_START'
 export const LOADING_STOP = 'LOADING_STOP'
 export const USER_AUTHENTICATED = 'USER_AUTHENTICATED'
+export const PROJECT_CREATED = 'PROJECT_CREATED'
 
 export function startLoading () {
   return {
@@ -19,5 +20,13 @@ export function authenticateUser (user, token) {
     type: USER_AUTHENTICATED,
     user: user,
     token: token
+  }
+}
+
+export function createProject (project, message) {
+  return {
+    type: PROJECT_CREATED,
+    project: project,
+    message: message
   }
 }
