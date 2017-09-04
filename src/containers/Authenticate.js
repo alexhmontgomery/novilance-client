@@ -14,27 +14,18 @@ class Authenticate extends Component {
       redirect: false
     }
 
-    this.handleRoleChange = this.handleRoleChange.bind(this)
-    this.handleEmailChange = this.handleEmailChange.bind(this)
-    this.handlePasswordChange = this.handlePasswordChange.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
   }
 
-  handleRoleChange (event) {
-    this.setState({selectedRole: event.target.value})
-  }
+  handleInputChange (event) {
+    const target = event.target
+    const value = target.value
+    const name = target.name
 
-  handleEmailChange (event) {
-    this.setState({email: event.target.value})
-  }
-
-  handlePasswordChange (event) {
-    this.setState({password: event.target.value})
-  }
-
-  handlePasswordConfChange (event) {
-    this.setState({passwordConf: event.target.value})
-    // TODO: Handle passwords not matching
+    this.setState({
+      [name]: value
+    })
   }
 
   handleLogin (event) {
@@ -86,18 +77,18 @@ class Authenticate extends Component {
         <div className='login-form-box'>
           <form onSubmit={this.handleLogin}>
             <div>
-              <select value={this.state.selectedRole} onChange={this.handleRoleChange}>
+              <select name='selectedRole' value={this.state.selectedRole} onChange={this.handleInputChange}>
                 <option value='freelancer'>Freelancer</option>
                 <option value='employer'>Employer</option>
               </select>
             </div>
 
             <div>
-              <input type='email' onChange={this.handleEmailChange} placeholder='Your email' value={this.state.email} />
+              <input type='email' name='email' onChange={this.handleInputChange} placeholder='Your email' value={this.state.email} />
             </div>
 
             <div>
-              <input type='password' onChange={this.handlePasswordChange} placeholder='Your password' value={this.state.password} />
+              <input type='password' name='password' onChange={this.handleInputChange} placeholder='Your password' value={this.state.password} />
             </div>
 
             <button type='submit'>Login</button>

@@ -17,7 +17,18 @@ class ProjectCreate extends Component {
       redirect: ''
     }
 
+    this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleInputChange (event) {
+    const target = event.target
+    const value = target.value
+    const name = target.name
+
+    this.setState({
+      [name]: value
+    })
   }
 
   handleSubmit (e) {
@@ -57,7 +68,7 @@ class ProjectCreate extends Component {
   render () {
     if (this.state.redirect === true) {
       return (
-        <Redirect to={`project/${this.props.project.newProject.id}`} />
+        <Redirect to={`/project/${this.props.project.newProject.id}`} />
       )
     }
 
@@ -72,22 +83,22 @@ class ProjectCreate extends Component {
           <form onSubmit={this.handleSubmit}>
 
             <div>
-              <input type='text' onChange={(e) => this.setState({name: e.target.value})} placeholder='Project Name' value={this.state.name} />
+              <input type='text' name='name' onChange={this.handleInputChange} placeholder='Project Name' value={this.state.name} />
             </div>
             <div>
-              <input type='text' onChange={(e) => this.setState({type: e.target.value})} placeholder='Type of project' value={this.state.type} />
+              <input type='text' name='type' onChange={this.handleInputChange} placeholder='Type of project' value={this.state.type} />
             </div>
             <div>
-              <textarea onChange={(e) => this.setState({description: e.target.value})} placeholder='Description of project scope' rows='5' value={this.state.description} />
+              <textarea name='description' onChange={this.handleInputChange} placeholder='Description of project scope' rows='5' value={this.state.description} />
             </div>
             <div>
-              <input type='number' onChange={(e) => this.setState({rate: e.target.value})} placeholder='Hourly rate of project' value={this.state.rate} />
+              <input type='number' name='rate' onChange={this.handleInputChange} placeholder='Hourly rate of project' value={this.state.rate} />
             </div>
             <div>
-              <input type='text' onChange={(e) => this.setState({city: e.target.value})} placeholder='City of project' value={this.state.city} />
+              <input type='text' name='city' onChange={this.handleInputChange} placeholder='City of project' value={this.state.city} />
             </div>
             <div>
-              <input type='text' onChange={(e) => this.setState({state: e.target.value})} placeholder='State of project' value={this.state.state} />
+              <input type='text' name='state' onChange={this.handleInputChange} placeholder='State of project' value={this.state.state} />
             </div>
             <button type='submit'>Create Project</button>
 

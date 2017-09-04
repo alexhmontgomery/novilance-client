@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { withRouter } from 'react-router'
 import { startLoading, stopLoading } from '../actions/index'
 
 class Project extends Component {
@@ -16,9 +17,9 @@ class Project extends Component {
   componentDidMount () {
     this.props.startLoading()
 
-    const {id} = this.props.match.params
+    const projectId = this.props.projectId
 
-    fetch(`http://0.0.0.0:5000/project/1`, {
+    fetch(`http://0.0.0.0:5000/project/${projectId}`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -56,10 +57,11 @@ class Project extends Component {
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps (state, ownProps) {
   return {
     user: state.user,
-    project: state.project
+    project: state.project,
+    projectId: ownProps.match.params.id
   }
 }
 
@@ -70,4 +72,4 @@ function mapDispatchToProps (dispatch) {
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Project)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Project))
