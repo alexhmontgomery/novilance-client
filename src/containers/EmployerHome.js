@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { startLoading, stopLoading } from '../actions/index'
+import config from '../config/main'
 
 class EmployerHome extends Component {
   constructor (props) {
@@ -15,10 +16,8 @@ class EmployerHome extends Component {
 
   componentDidMount () {
     this.props.startLoading()
-    //
-    // const projectId = this.props.projectId
 
-    fetch(`http://0.0.0.0:5000/projects/employer/master`, {
+    fetch(`${config.server}/projects/employer/master`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -63,6 +62,7 @@ class EmployerHome extends Component {
                 <Link to={`/project/${project.id}`}><h3>Title: {project.name}</h3></Link>
                 <p>Type: {project.type}</p>
                 <p>Description: {project.description}</p>
+                <p>Interested Employees: {project.interest.length || 0}</p>
               </div>
             )}
           </div>

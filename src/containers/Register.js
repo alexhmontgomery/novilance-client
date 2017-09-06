@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
+import { startLoading, stopLoading, authenticateUser } from '../actions/index'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import config from '../config/main'
 
-export default class Register extends Component {
+class Register extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -8,9 +13,9 @@ export default class Register extends Component {
       email: '',
       password: '',
       passwordConf: '',
+      message: '',
       redirect: false
     }
-
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleRegistration = this.handleRegistration.bind(this)
   }
@@ -19,7 +24,6 @@ export default class Register extends Component {
     const target = event.target
     const value = target.value
     const name = target.name
-
     this.setState({
       [name]: value
     })
@@ -27,10 +31,15 @@ export default class Register extends Component {
 
   handleRegistration (event) {
     event.preventDefault()
-
-    // TODO: handle conflicting passwords!!!!!!!
-
-    fetch('http://0.0.0.0:5000/register', {
+    if (this.state.password !== this.state.passwordConf) {
+      return (
+        this.setState({
+          message: 'Passwords do not match.'
+        })
+      )
+    }
+    this.props.startLoading()
+    fetch(`${config.server}/register`, {
       method: 'POST',
       body: JSON.stringify({
         role: this.state.selectedRole,
@@ -44,19 +53,47 @@ export default class Register extends Component {
     .then(r => r.json())
     .then(json => {
       console.log(json)
+      if (json.success === true) {
+        const user = json.user
+        const token = json.token
+        this.props.authenticateUser(user, token)
+        this.setState({
+          redirect: true
+        })
+      } else {
+        // Display error messages
+        this.setState({
+          message: json.message || json.error.errors[0].message
+        })
+      }
+    })
+    .then(() => {
+      this.props.stopLoading()
     })
   }
 
   render () {
+    if (this.state.redirect === true) {
+      return (
+        <Redirect to={`/${this.props.user.userInfo.role}/home`} />
+      )
+    }
     return (
       <main id='register-page' >
         <div>
-          <h1>Sign up to use Novilance as a Freelancer or an employer:</h1>
+          <h1>Sign up to use Novilance as a freelancer or an employer:</h1>
         </div>
+
+        {this.state.message &&
+          <div>
+            <p>Warning: {this.state.message}</p>
+          </div>
+        }
 
         <div className='register-form-box'>
           <form onSubmit={this.handleRegistration}>
             <div>
+              <label>Select your role:</label><br />
               <select name='selectedRole' value={this.state.selectedRole} onChange={this.handleInputChange}>
                 <option value='freelancer'>Freelancer</option>
                 <option value='employer'>Employer</option>
@@ -64,19 +101,17 @@ export default class Register extends Component {
             </div>
 
             <div>
+              <label>A valid email address is required</label><br />
               <input type='email' name='email' onChange={this.handleInputChange} placeholder='Your email' value={this.state.email} />
             </div>
 
             <div>
-              <input type='password' name='password' onChange={this.handleInputChange} placeholder='Your password' value={this.state.password} />
+              <label>Password must be 5-20 characters in length</label><br />
+              <input type='password' name='password' onChange={this.handleInputChange} placeholder='Create a password' value={this.state.password} />
             </div>
 
             <div>
               <input type='password' name='passwordConf' onChange={this.handleInputChange} placeholder='Confirm your password' value={this.state.passwordConf} />
-            </div>
-
-            <div>
-              <p>Password confirmation errors here</p>
             </div>
 
             <button type='submit'>Register</button>
@@ -87,3 +122,19 @@ export default class Register extends Component {
     )
   }
 }
+
+function mapStateToProps (state) {
+  return {
+    user: state.user
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({
+    startLoading: startLoading,
+    stopLoading: stopLoading,
+    authenticateUser: authenticateUser
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register)

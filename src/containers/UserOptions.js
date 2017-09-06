@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { logoutUser } from '../actions/index'
 
-class UserOptions extends Component() {
+class UserOptions extends Component {
   render () {
     return (
-      <div>
+      <div className='navbar-horizontal-item'>
         {!this.props.user.isAuthenticated &&
           <div className='navbar-horizontal-item' id='navbar-vertical-section'>
             <div className='navbar-vertical-item' id='top-vert-navbar-item'>
@@ -18,7 +19,7 @@ class UserOptions extends Component() {
           </div>
         }
         {this.props.user.isAuthenticated &&
-          <NavLink to='/logout' className='navbar-horizontal-item'>Logout</NavLink>
+          <NavLink onClick={this.props.logoutUser} to='/authenticate'>Logout</NavLink>
         }
       </div>
     )
@@ -33,7 +34,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return bindActionCreators({
-
+    logoutUser: logoutUser
   }, dispatch)
 }
 

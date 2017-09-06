@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
 import { startLoading, stopLoading } from '../actions/index'
+import Interest from './Interest'
 
 class Project extends Component {
   constructor (props) {
@@ -51,7 +52,11 @@ class Project extends Component {
             <h3>Type: {this.state.project.type}</h3>
             <p>Description {this.state.project.description}</p>
           </div>
+          <Interest currentProject={this.state.project} />
         </section>
+        <div>
+          <Link to='/projects'>Back to all projects</Link>
+        </div>
       </main>
     )
   }

@@ -1,6 +1,7 @@
 export const LOADING_START = 'LOADING_START'
 export const LOADING_STOP = 'LOADING_STOP'
 export const USER_AUTHENTICATED = 'USER_AUTHENTICATED'
+export const USER_LOGGED_OUT = 'USER_LOGGED_OUT'
 export const PROJECT_CREATED = 'PROJECT_CREATED'
 
 export function startLoading () {
@@ -20,6 +21,12 @@ export function authenticateUser (user, token) {
     type: USER_AUTHENTICATED,
     user: user,
     token: token
+  }
+}
+
+export function logoutUser () {
+  return {
+    type: USER_LOGGED_OUT
   }
 }
 

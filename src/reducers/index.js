@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { LOADING_START, LOADING_STOP, USER_AUTHENTICATED, PROJECT_CREATED } from '../actions/index'
+import { LOADING_START, LOADING_STOP, USER_AUTHENTICATED, PROJECT_CREATED, USER_LOGGED_OUT } from '../actions/index'
 import update from 'immutability-helper'
 
 const initialUserState = {
@@ -23,20 +23,35 @@ const loadingReducer = (state = false, action) => {
 }
 
 const userReducer = (state = initialUserState, action) => {
-  if (action.type === USER_AUTHENTICATED) {
-    return update(state, {
-      isAuthenticated: {
-        $set: true
-      },
-      token: {
-        $set: action.token
-      },
-      userInfo: {
-        $set: action.user
-      }
-    })
+  switch (action.type) {
+    case USER_AUTHENTICATED:
+      return update(state, {
+        isAuthenticated: {
+          $set: true
+        },
+        token: {
+          $set: action.token
+        },
+        userInfo: {
+          $set: action.user
+        }
+      })
+    case USER_LOGGED_OUT:
+      return update(state, {
+        isAuthenticated: {
+          $set: false
+        },
+        token: {
+          $set: ''
+        },
+        userInfo: {
+          $set: ''
+        }
+      })
+
+    default:
+      return state
   }
-  return state
 }
 
 const projectReducer = (state = initialProjectState, action) => {

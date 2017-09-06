@@ -12,6 +12,7 @@ import Register from './containers/Register'
 import Authenticate from './containers/Authenticate'
 import FreelancerHome from './containers/FreelancerHome'
 import EmployerHome from './containers/EmployerHome'
+import Projects from './containers/Projects'
 import Project from './containers/Project'
 import ProjectCreate from './containers/ProjectCreate'
 import registerServiceWorker from './registerServiceWorker'
@@ -29,6 +30,7 @@ ReactDOM.render(
           <Route path='/authenticate' component={Authenticate} />
           <Route path='/freelancer/home' component={FreelancerHome} />
           <Route path='/employer/home' component={EmployerHome} />
+          <Route path='/projects' component={Projects} />
           <Route path='/project/new' component={ProjectCreate} />
           <Route path='/project/:id' component={Project} />
         </Switch>

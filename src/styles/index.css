@@ -185,3 +185,11 @@ main {
   font-size: 1.2em;
   margin-top: 0.5em;
 }
+
+.unclicked {
+  background-color: grey;
+}
+
+.clicked {
+  background-color: green;
+}

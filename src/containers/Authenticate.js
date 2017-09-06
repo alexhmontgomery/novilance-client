@@ -11,9 +11,9 @@ class Authenticate extends Component {
       selectedRole: 'freelancer', // default is freelancer
       email: '',
       password: '',
+      message: '',
       redirect: false
     }
-
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
   }
@@ -22,7 +22,6 @@ class Authenticate extends Component {
     const target = event.target
     const value = target.value
     const name = target.name
-
     this.setState({
       [name]: value
     })
@@ -31,7 +30,6 @@ class Authenticate extends Component {
   handleLogin (event) {
     event.preventDefault()
     this.props.startLoading()
-
     fetch('http://0.0.0.0:5000/authenticate', {
       method: 'POST',
       body: JSON.stringify({
@@ -46,12 +44,19 @@ class Authenticate extends Component {
     .then(r => r.json())
     .then(json => {
       console.log(json)
-      const user = json.user
-      const token = json.token
-      this.props.authenticateUser(user, token)
-      this.setState({
-        redirect: true
-      })
+      if (json.success === true) {
+        const user = json.user
+        const token = json.token
+        this.props.authenticateUser(user, token)
+        this.setState({
+          redirect: true
+        })
+      } else {
+        // Display error messages
+        this.setState({
+          message: json.message
+        })
+      }
     })
     .then(() => {
       this.props.stopLoading()
@@ -59,13 +64,9 @@ class Authenticate extends Component {
   }
 
   render () {
-    if (this.state.redirect === true && this.props.user.userInfo.role === 'freelancer') {
+    if (this.state.redirect === true) {
       return (
-        <Redirect to='/freelancer/home' />
-      )
-    } else if (this.state.redirect === true && this.props.user.userInfo.role === 'employer') {
-      return (
-        <Redirect to='/employer/home' />
+        <Redirect to={`/${this.props.user.userInfo.role}/home`} />
       )
     }
     return (
@@ -73,6 +74,12 @@ class Authenticate extends Component {
         <div>
           <h1>Login in to your account as a Freelancer or an employer:</h1>
         </div>
+
+        {this.state.message &&
+          <div>
+            <p>Warning: {this.state.message}</p>
+          </div>
+        }
 
         <div className='login-form-box'>
           <form onSubmit={this.handleLogin}>
