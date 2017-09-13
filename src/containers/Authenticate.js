@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { startLoading, stopLoading, authenticateUser } from '../actions/index'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -71,35 +71,39 @@ class Authenticate extends Component {
     }
     return (
       <main id='authenticate-page' >
-        <div>
-          <h1>Login in to your account as a Freelancer or an employer:</h1>
-        </div>
+        <div className='outer-border-box'>
+          <div className='login-container'>
+            <div className='login-title-box'>
+              <h1>novilance</h1>
+            </div>
 
-        {this.state.message &&
-          <div>
-            <p>Warning: {this.state.message}</p>
+            {this.state.message &&
+              <div>
+                <p>Warning: {this.state.message}</p>
+              </div>
+            }
+
+            <form className='login-form' onSubmit={this.handleLogin}>
+              <div>
+                <select name='selectedRole' value={this.state.selectedRole} onChange={this.handleInputChange}>
+                  <option value='freelancer'>Freelancer</option>
+                  <option value='employer'>Employer</option>
+                </select>
+              </div>
+
+              <div>
+                <input type='email' name='email' onChange={this.handleInputChange} placeholder='Your email' value={this.state.email} />
+              </div>
+
+              <div>
+                <input type='password' name='password' onChange={this.handleInputChange} placeholder='Your password' value={this.state.password} />
+              </div>
+
+              <button type='submit'>Login</button>
+            </form>
+
+            <p>Don't have an account? <Link className='login-link' to='/register'>Sign Up</Link></p>
           </div>
-        }
-
-        <div className='login-form-box'>
-          <form onSubmit={this.handleLogin}>
-            <div>
-              <select name='selectedRole' value={this.state.selectedRole} onChange={this.handleInputChange}>
-                <option value='freelancer'>Freelancer</option>
-                <option value='employer'>Employer</option>
-              </select>
-            </div>
-
-            <div>
-              <input type='email' name='email' onChange={this.handleInputChange} placeholder='Your email' value={this.state.email} />
-            </div>
-
-            <div>
-              <input type='password' name='password' onChange={this.handleInputChange} placeholder='Your password' value={this.state.password} />
-            </div>
-
-            <button type='submit'>Login</button>
-          </form>
         </div>
 
       </main>

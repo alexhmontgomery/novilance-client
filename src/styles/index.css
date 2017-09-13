@@ -1,3 +1,5 @@
+/*Nav bar BLUE = rgb(56, 189, 206)*/
+
 * {
 box-sizing: border-box;
 margin: 0 auto;
@@ -7,6 +9,15 @@ font-family: 'Cabin', sans-serif;
 body {
   margin: 0;
   padding: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
 }
 
 nav {
@@ -84,35 +95,37 @@ nav a {
 
 main {
   min-height: 91vh;
+  background-color: rgb(236, 240, 241);
 }
 
 /*=====HOME PAGE=====*/
-#home-page {
+#welcome-page, #authenticate-page, #register-page {
   background-image: url('../images/background-1-novilance.png');
   background-size: cover;
-}
-
-#home-main-box {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 10%;
+  padding: 5%;
 }
 
-.home-boxes {
-  flex-basis: 50%;
+.outer-border-box {
   border: 2px solid #FFFFFF;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   align-content: center;
-  margin: 0em 2em;
+  margin: 0 2%;
+  padding: 1%;
 }
 
-.home-inner-boxes {
-  margin: 2%;
-  padding: 5em 5em;
+.welcome-box {
+  flex-basis: 50%;
+}
+
+.welcome-container {
+  margin: 20px;
+  padding: 5em;
   background-color: rgba(0, 0, 0, 0.7);
   color: #FFFFFF;
   display: flex;
@@ -120,29 +133,21 @@ main {
   justify-content: space-between;
   align-items: center;
   align-content: center;
-}
-
-.home-text-group, .home-headings {
   text-align: center;
 }
 
-.home-headings {
+.welcome-title-box {
   margin: 1em 10%;
   border-bottom: 1px solid #FFFFFF;
   font-size: 1.2em;
   font-weight: 100;
 }
 
-.home-description {
-  font-size: 0.7em;
-  font-weight: 200;
-}
-
-.home-box-link {
+.welcome-link {
   border: 2px solid #FFFFFF;
   padding: 0.5em 3em;
   margin-top: 1.5em;
-  font-size: 0.7em;
+  font-size: 0.9em;
   color: #FFFFFF;
   font-weight: 200;
   text-decoration: none;
@@ -156,6 +161,20 @@ main {
   align-items: center;
   align-content: center;
 }
+
+.login-container {
+  margin: 20px;
+  padding: 2em;
+  background-color: rgba(236, 240, 241, 0.7);
+  color: #333333;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+}
+
 
 .register-form-box {
   border: 2px solid black;
@@ -176,15 +195,42 @@ main {
   align-content: center;
 }
 
-.login-form-box {
-  border: 2px solid black;
-  padding: 0.7em;
+.login-title-box {
+  font-size: 1.5em;
+  padding: 10px 50px;
 }
 
-.login-form-box form input, form select, button {
+.login-form {
+  width: 100%;
+}
+
+.login-form select, input, button {
+  width: 100%;
+  font-size: 15px;
+  padding: 10px;
+  margin: 8px 0px;
+}
+
+.login-form button {
+  background-color: rgb(56, 189, 206);
+  color: #FFFFFF;
+  border: none;
+}
+
+.login-link {
+  color: rgb(56, 189, 206);
+  text-decoration: none;
+}
+
+/*.login-form-box {
+  border: 2px solid black;
+  padding: 0.7em;
+}*/
+
+/*.login-form-box form input, form select, button {
   font-size: 1.2em;
   margin-top: 0.5em;
-}
+}*/
 
 .unclicked {
   background-color: grey;
@@ -192,4 +238,70 @@ main {
 
 .clicked {
   background-color: green;
+}
+
+/*//////////////////
+Profile Page
+//////////////////*/
+#profile-page {
+  display: flex;
+  flex-direction: row;
+}
+
+aside {
+  flex-basis: 15%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: flex-end;
+  align-items: flex-end;
+  border-right: 1px solid #333333;
+}
+
+.aside-link {
+  padding: 15px;
+  width: 100%;
+  border-bottom: 1px solid #333333;
+}
+
+.aside-link a {
+    color: #333333;
+}
+
+section {
+  flex-basis: 85%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.user-header-box, .pending-projects-box {
+  background-color: #FFFFFF;
+  border: 1px solid grey;
+  width: 100%;
+  padding: 20px;
+  margin: 20px 0px;
+}
+
+.user-header-box h1 {
+  color: rgb(56, 189, 206)
+}
+
+
+
+.pending-projects-box h2 {
+  color: rgb(56, 189, 206)
+}
+
+.pending-projects-table {
+  width: 100%;
+}
+
+.pending-projects-table th {
+  border-bottom: 2px solid grey;
+}
+
+.pending-projects-table td {
+  border-bottom: 1px solid grey;
 }

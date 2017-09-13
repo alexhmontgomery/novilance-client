@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import AsideFreelancer from '../components/AsideFreelancer'
 import config from '../config/main'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -39,29 +40,32 @@ class FreelancerHome extends Component {
   render () {
     return (
       <main id='profile-page'>
-        This is the Freelancer home page
-        <aside>
-          <div>
-            <Link to='/projects'>Browse Projects</Link>
-          </div>
-        </aside>
+        <AsideFreelancer />
+
         <section>
-          <div>
+          <div className='user-header-box'>
             <h1>{this.props.user.userInfo.givenName} {this.props.user.userInfo.surname}</h1>
-            <p>{this.props.user.userInfo.description}</p>
+            <p><em>{this.props.user.userInfo.description}</em></p>
             <p>Location: {this.props.user.userInfo.city}, {this.props.user.userInfo.state}</p>
           </div>
 
-          <div>
-            <h2>Project List:</h2>
+          <div className='pending-projects-box'>
+            <h2>Pending Projects:</h2>
 
-            {this.state.projects.map((project) =>
-              <div key={project.id}>
-                <Link to={`/project/${project.id}`}><h3>Title: {project.name}</h3></Link>
-                <p>Type: {project.type}</p>
-                <p>Description: {project.description}</p>
-              </div>
+            <table className='pending-projects-table'>
+              <tr>
+                <th>Project</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+              {this.state.projects.map((project) =>
+                <tr key={project.id}>
+                  <td><Link to={`/project/${project.id}`}>{project.name}</Link></td>
+                  <td>{project.type}</td>
+                  <td>{project.description}</td>
+                </tr>
             )}
+            </table>
           </div>
         </section>
       </main>

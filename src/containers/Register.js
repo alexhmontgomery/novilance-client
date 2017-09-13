@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { startLoading, stopLoading, authenticateUser } from '../actions/index'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -80,44 +80,47 @@ class Register extends Component {
     }
     return (
       <main id='register-page' >
-        <div>
-          <h1>Sign up to use Novilance as a freelancer or an employer:</h1>
-        </div>
+        <div className='outer-border-box'>
+          <div className='login-container'>
+            <div className='login-title-box'>
+              <h1>novilance</h1>
+            </div>
 
-        {this.state.message &&
-          <div>
-            <p>Warning: {this.state.message}</p>
+            {this.state.message &&
+            <div>
+              <p>Warning: {this.state.message}</p>
+            </div>
+            }
+
+            <form className='login-form' onSubmit={this.handleRegistration}>
+              <div>
+                <label>Select your role:</label><br />
+                <select name='selectedRole' value={this.state.selectedRole} onChange={this.handleInputChange}>
+                  <option value='freelancer'>Freelancer</option>
+                  <option value='employer'>Employer</option>
+                </select>
+              </div>
+
+              <div>
+                <label>A valid email address is required</label><br />
+                <input type='email' name='email' onChange={this.handleInputChange} placeholder='Your email' value={this.state.email} />
+              </div>
+
+              <div>
+                <label>Password must be 5-20 characters in length</label><br />
+                <input type='password' name='password' onChange={this.handleInputChange} placeholder='Create a password' value={this.state.password} />
+              </div>
+
+              <div>
+                <input type='password' name='passwordConf' onChange={this.handleInputChange} placeholder='Confirm your password' value={this.state.passwordConf} />
+              </div>
+
+              <button type='submit'>Register</button>
+            </form>
+
+            <p>Already have an account? <Link className='login-link' to='/authenicate'>Log In</Link></p>
           </div>
-        }
-
-        <div className='register-form-box'>
-          <form onSubmit={this.handleRegistration}>
-            <div>
-              <label>Select your role:</label><br />
-              <select name='selectedRole' value={this.state.selectedRole} onChange={this.handleInputChange}>
-                <option value='freelancer'>Freelancer</option>
-                <option value='employer'>Employer</option>
-              </select>
-            </div>
-
-            <div>
-              <label>A valid email address is required</label><br />
-              <input type='email' name='email' onChange={this.handleInputChange} placeholder='Your email' value={this.state.email} />
-            </div>
-
-            <div>
-              <label>Password must be 5-20 characters in length</label><br />
-              <input type='password' name='password' onChange={this.handleInputChange} placeholder='Create a password' value={this.state.password} />
-            </div>
-
-            <div>
-              <input type='password' name='passwordConf' onChange={this.handleInputChange} placeholder='Confirm your password' value={this.state.passwordConf} />
-            </div>
-
-            <button type='submit'>Register</button>
-          </form>
         </div>
-
       </main>
     )
   }
