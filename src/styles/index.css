@@ -54,8 +54,13 @@ nav a {
   padding: 0.5em;
 }
 
-.navbar-link-group {
+.navbar-link-container {
   flex-basis: 40%;
+  display: flex;
+}
+
+.navbar-link-group {
+  flex-basis: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
