@@ -87,7 +87,7 @@ class Authenticate extends Component {
               <div>
                 <select name='selectedRole' value={this.state.selectedRole} onChange={this.handleInputChange}>
                   <option value='freelancer'>Freelancer</option>
-                  <option value='employer'>Employer</option>
+                  <option value='client'>Client</option>
                 </select>
               </div>
 

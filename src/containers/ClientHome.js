@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import AsideClient from '../components/AsideClient'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { startLoading, stopLoading } from '../actions/index'
 import config from '../config/main'
 
-class EmployerHome extends Component {
+class ClientHome extends Component {
   constructor (props) {
     super(props)
 
@@ -17,7 +18,7 @@ class EmployerHome extends Component {
   componentDidMount () {
     this.props.startLoading()
 
-    fetch(`${config.server}/projects/employer/master`, {
+    fetch(`${config.server}/projects/client/master`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -39,33 +40,37 @@ class EmployerHome extends Component {
   render () {
     return (
       <main id='profile-page'>
-        This is the Employer home page
-        <aside>
-          <div>
-            <Link to='/project/new'>Create New Project</Link>
-          </div>
-          <div>
-            <Link to='/freelancers/search'>Browse Freelancers</Link>
-          </div>
-        </aside>
+        <AsideClient />
+
         <section>
-          <div>
+          <div className='user-header-box'>
             <h1>{this.props.user.userInfo.displayName}</h1>
             <p>Location: {this.props.user.userInfo.city}, {this.props.user.userInfo.state}</p>
           </div>
 
-          <div>
-            <h2>Project List:</h2>
+          <div className='pending-projects-box'>
+            <h2>Active Projects:</h2>
 
-            {this.state.projects.map((project) =>
-              <div key={project.id}>
-                <Link to={`/project/${project.id}`}><h3>Title: {project.name}</h3></Link>
-                <p>Type: {project.type}</p>
-                <p>Description: {project.description}</p>
-                <p>Interested Employees: {project.interest.length || 0}</p>
-              </div>
-            )}
+            <table className='pending-projects-table'>
+              <tbody>
+                <tr>
+                  <th>Project</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                  <th>Prospects</th>
+                </tr>
+                {this.state.projects.map((project) =>
+                  <tr key={project.id}>
+                    <td><Link to={`/project/${project.id}`}>{project.name}</Link></td>
+                    <td>{project.type}</td>
+                    <td>{project.description}</td>
+                    <td>{project.interest.length || 0}</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
+
         </section>
       </main>
     )
@@ -85,4 +90,4 @@ function mapDispatchToProps (dispatch) {
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EmployerHome)
+export default connect(mapStateToProps, mapDispatchToProps)(ClientHome)

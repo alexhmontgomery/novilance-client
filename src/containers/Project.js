@@ -11,7 +11,8 @@ class Project extends Component {
     super(props)
 
     this.state = {
-      project: ''
+      project: '',
+      interests: ''
     }
   }
 
@@ -31,7 +32,8 @@ class Project extends Component {
     .then(json => {
       console.log(json)
       this.setState({
-        project: json.project
+        project: json.project,
+        interests: json.interests
       })
     })
     .then(() => {
@@ -52,7 +54,15 @@ class Project extends Component {
             <h3>Type: {this.state.project.type}</h3>
             <p>Description {this.state.project.description}</p>
           </div>
-          <Interest currentProject={this.state.project} />
+          {this.props.user.userInfo.role === 'freelancer' &&
+            <Interest currentProject={this.state.project} />
+          }
+
+          {this.props.user.userInfo.role === 'client' &&
+          this.props.user.userInfo.id === this.state.project.clientId &&
+            <p># Freelancers Interested: {this.state.interests.length}</p>
+          }
+
         </section>
         <div>
           <Link to='/projects'>Back to all projects</Link>

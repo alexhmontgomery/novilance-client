@@ -53,18 +53,20 @@ class FreelancerHome extends Component {
             <h2>Pending Projects:</h2>
 
             <table className='pending-projects-table'>
-              <tr>
-                <th>Project</th>
-                <th>Type</th>
-                <th>Description</th>
-              </tr>
-              {this.state.projects.map((project) =>
-                <tr key={project.id}>
-                  <td><Link to={`/project/${project.id}`}>{project.name}</Link></td>
-                  <td>{project.type}</td>
-                  <td>{project.description}</td>
+              <tbody>
+                <tr>
+                  <th>Project</th>
+                  <th>Type</th>
+                  <th>Description</th>
                 </tr>
-            )}
+                {this.state.projects.map((project) =>
+                  <tr key={project.id}>
+                    <td><Link to={`/project/${project.id}`}>{project.name}</Link></td>
+                    <td>{project.type}</td>
+                    <td>{project.description}</td>
+                  </tr>
+                )}
+              </tbody>
             </table>
           </div>
         </section>

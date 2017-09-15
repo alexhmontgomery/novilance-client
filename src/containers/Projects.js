@@ -47,7 +47,7 @@ class Projects extends Component {
           {this.state.projects.map((project) =>
             <div key={project.id}>
               <Link to={`/project/${project.id}`}><h3>Title: {project.name}</h3></Link>
-              <p>Employer: {project.employer.displayName}</p>
+              <p>Client: {project.client.displayName}</p>
               <p>Type: {project.type}</p>
               <p>Description: {project.description}</p>
               {project.interest.map((interestEach) =>
