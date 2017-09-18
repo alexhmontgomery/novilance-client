@@ -3,6 +3,7 @@ export const LOADING_STOP = 'LOADING_STOP'
 export const USER_AUTHENTICATED = 'USER_AUTHENTICATED'
 export const USER_LOGGED_OUT = 'USER_LOGGED_OUT'
 export const PROJECT_CREATED = 'PROJECT_CREATED'
+export const USER_PROFILE_UPDATED = 'USER_PROFILE_UPDATED'
 
 export function startLoading () {
   return {
@@ -35,5 +36,12 @@ export function createProject (project, message) {
     type: PROJECT_CREATED,
     project: project,
     message: message
+  }
+}
+
+export function updateUserProfile (profile) {
+  return {
+    type: USER_PROFILE_UPDATED,
+    profile: profile
   }
 }

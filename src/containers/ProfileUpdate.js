@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import AsideClient from '../components/AsideClient'
+import ProfileClientUpdate from '../containers/ProfileClientUpdate'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { startLoading, stopLoading } from '../actions/index'
 import config from '../config/main'
 
-class ClientHome extends Component {
+class ProfileUpdate extends Component {
   constructor (props) {
     super(props)
 
@@ -41,37 +42,7 @@ class ClientHome extends Component {
     return (
       <main id='profile-page'>
         <AsideClient />
-
-        <section>
-          <div className='user-header-box'>
-            <h1>{this.props.user.profile.displayName}</h1>
-            <p>Location: {this.props.user.profile.city}, {this.props.user.profile.state}</p>
-          </div>
-
-          <div className='pending-projects-box'>
-            <h2>Active Projects:</h2>
-
-            <table className='pending-projects-table'>
-              <tbody>
-                <tr>
-                  <th>Project</th>
-                  <th>Type</th>
-                  <th>Description</th>
-                  <th>Prospects</th>
-                </tr>
-                {this.state.projects.map((project) =>
-                  <tr key={project.id}>
-                    <td><Link to={`/project/${project.id}`}>{project.name}</Link></td>
-                    <td>{project.type}</td>
-                    <td>{project.description}</td>
-                    <td>{project.interest.length || 0}</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-
-        </section>
+        <ProfileClientUpdate />
       </main>
     )
   }
@@ -90,4 +61,4 @@ function mapDispatchToProps (dispatch) {
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ClientHome)
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileUpdate)

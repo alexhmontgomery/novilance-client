@@ -66,7 +66,7 @@ class Authenticate extends Component {
   render () {
     if (this.state.redirect === true) {
       return (
-        <Redirect to={`/${this.props.user.userInfo.role}/home`} />
+        <Redirect to={`/${this.props.user.profile.role}/home`} />
       )
     }
     return (

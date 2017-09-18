@@ -51,7 +51,7 @@ class Projects extends Component {
               <p>Type: {project.type}</p>
               <p>Description: {project.description}</p>
               {project.interest.map((interestEach) =>
-                interestEach.freelancerId === this.props.user.userInfo.id &&
+                interestEach.freelancerId === this.props.user.profile.id &&
                 <div>INTERESTED</div>
               )}
               {/* {project.interest.id &&

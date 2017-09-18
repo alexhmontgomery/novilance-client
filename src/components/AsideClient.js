@@ -15,7 +15,7 @@ export default class AsideClient extends Component {
           <Link to='/project/new'>> Create New Project</Link>
         </div>
         <div className='aside-link'>
-          <Link to='/projects'>> Edit Profile</Link>
+          <Link to='/profile/update'>> Edit Profile</Link>
         </div>
         <div className='aside-link'>
           <Link to='/projects'>> Settings</Link>

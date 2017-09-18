@@ -25,7 +25,7 @@ class UserOptions extends Component {
         {this.props.user.isAuthenticated &&
           <div className='navbar-link-group'>
             <NavLink to='/projects' className='navbar-horizontal-item'>Projects</NavLink>
-            <NavLink to={`/${this.props.user.userInfo.role}/home`} className='navbar-horizontal-item'>Home</NavLink>
+            <NavLink to={`/${this.props.user.profile.role}/home`} className='navbar-horizontal-item'>Home</NavLink>
             <NavLink onClick={this.props.logoutUser} to='/authenticate' className='navbar-horizontal-item'>Logout</NavLink>
           </div>
         }

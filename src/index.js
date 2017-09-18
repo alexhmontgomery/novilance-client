@@ -15,6 +15,7 @@ import ClientHome from './containers/ClientHome'
 import Projects from './containers/Projects'
 import Project from './containers/Project'
 import ProjectCreate from './containers/ProjectCreate'
+import ProfileUpdate from './containers/ProfileUpdate'
 import registerServiceWorker from './registerServiceWorker'
 
 const createStoreWithMiddleware = applyMiddleware()(createStore)
@@ -33,6 +34,7 @@ ReactDOM.render(
           <Route path='/projects' component={Projects} />
           <Route path='/project/new' component={ProjectCreate} />
           <Route path='/project/:id' component={Project} />
+          <Route path='/profile/update' component={ProfileUpdate} />
         </Switch>
       </BaseLayout>
     </BrowserRouter>

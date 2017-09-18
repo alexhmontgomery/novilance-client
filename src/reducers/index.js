@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
-import { LOADING_START, LOADING_STOP, USER_AUTHENTICATED, PROJECT_CREATED, USER_LOGGED_OUT } from '../actions/index'
+import { LOADING_START, LOADING_STOP, USER_AUTHENTICATED, PROJECT_CREATED, USER_LOGGED_OUT, USER_PROFILE_UPDATED } from '../actions/index'
 import update from 'immutability-helper'
 
 const initialUserState = {
   isAuthenticated: false,
   token: '',
-  userInfo: ''
+  profile: ''
 }
 
 const initialProjectState = {
@@ -32,7 +32,7 @@ const userReducer = (state = initialUserState, action) => {
         token: {
           $set: action.token
         },
-        userInfo: {
+        profile: {
           $set: action.user
         }
       })
@@ -44,8 +44,14 @@ const userReducer = (state = initialUserState, action) => {
         token: {
           $set: ''
         },
-        userInfo: {
+        profile: {
           $set: ''
+        }
+      })
+    case USER_PROFILE_UPDATED:
+      return update(state, {
+        profile: {
+          $set: action.profile
         }
       })
 

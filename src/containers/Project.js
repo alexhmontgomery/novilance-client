@@ -54,12 +54,12 @@ class Project extends Component {
             <h3>Type: {this.state.project.type}</h3>
             <p>Description {this.state.project.description}</p>
           </div>
-          {this.props.user.userInfo.role === 'freelancer' &&
+          {this.props.user.profile.role === 'freelancer' &&
             <Interest currentProject={this.state.project} />
           }
 
-          {this.props.user.userInfo.role === 'client' &&
-          this.props.user.userInfo.id === this.state.project.clientId &&
+          {this.props.user.profile.role === 'client' &&
+          this.props.user.profile.id === this.state.project.clientId &&
             <p># Freelancers Interested: {this.state.interests.length}</p>
           }
 

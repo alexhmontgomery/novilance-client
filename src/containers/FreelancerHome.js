@@ -44,9 +44,9 @@ class FreelancerHome extends Component {
 
         <section>
           <div className='user-header-box'>
-            <h1>{this.props.user.userInfo.givenName} {this.props.user.userInfo.surname}</h1>
-            <p><em>{this.props.user.userInfo.description}</em></p>
-            <p>Location: {this.props.user.userInfo.city}, {this.props.user.userInfo.state}</p>
+            <h1>{this.props.user.profile.givenName} {this.props.user.profile.surname}</h1>
+            <p><em>{this.props.user.profile.description}</em></p>
+            <p>Location: {this.props.user.profile.city}, {this.props.user.profile.state}</p>
           </div>
 
           <div className='pending-projects-box'>

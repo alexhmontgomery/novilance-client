@@ -4,6 +4,7 @@ import { startLoading, stopLoading, authenticateUser } from '../actions/index'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import config from '../config/main'
+// import { states } from 'countryjs'
 
 class Register extends Component {
   constructor (props) {
@@ -75,7 +76,7 @@ class Register extends Component {
   render () {
     if (this.state.redirect === true) {
       return (
-        <Redirect to={`/${this.props.user.userInfo.role}/home`} />
+        <Redirect to={`/${this.props.user.profile.role}/home`} />
       )
     }
     return (
@@ -98,6 +99,9 @@ class Register extends Component {
                 <select name='selectedRole' value={this.state.selectedRole} onChange={this.handleInputChange}>
                   <option value='freelancer'>Freelancer</option>
                   <option value='client'>Client</option>
+                  {/* {states('US').map((eachState) =>
+                    <option key={eachState} value={eachState}>{eachState}</option>
+                  )} */}
                 </select>
               </div>
 
