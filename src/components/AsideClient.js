@@ -12,7 +12,7 @@ export default class AsideClient extends Component {
           <Link to='/client/home'>> Active Projects</Link>
         </div>
         <div className='aside-link'>
-          <Link to='/project/new'>> Create New Project</Link>
+          <Link to='/projects/create'>> Create New Project</Link>
         </div>
         <div className='aside-link'>
           <Link to='/profile/update'>> Edit Profile</Link>

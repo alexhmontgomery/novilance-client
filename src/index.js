@@ -31,10 +31,11 @@ ReactDOM.render(
           <Route path='/authenticate' component={Authenticate} />
           <Route path='/freelancer/home' component={FreelancerHome} />
           <Route path='/client/home' component={ClientHome} />
-          <Route path='/projects' component={Projects} />
-          <Route path='/project/new' component={ProjectCreate} />
-          <Route path='/project/:id' component={Project} />
+          <Route path='/projects/search/' component={Projects} />
+          <Route path='/projects/create' component={ProjectCreate} />
+          <Route path='/projects/view/:id' component={Project} />
           <Route path='/profile/update' component={ProfileUpdate} />
+          {/* <Route component={NoMatch} /> */}
         </Switch>
       </BaseLayout>
     </BrowserRouter>

@@ -1562,14 +1562,6 @@ cosmiconfig@^2.1.0, cosmiconfig@^2.1.1:
     parse-json "^2.2.0"
     require-from-string "^1.1.0"
 
-countryjs@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/countryjs/-/countryjs-1.8.0.tgz#9edaa342a79b262d9eaae0d407a43328d861ce87"
-  dependencies:
-    lodash "^4.17.2"
-    minimatch "^3.0.3"
-    require-all "^2.2.0"
-
 create-ecdh@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/create-ecdh/-/create-ecdh-4.0.0.tgz#888c723596cdf7612f6498233eebd7a35301737d"
@@ -5429,10 +5421,6 @@ request@^2.79.0, request@^2.81.0:
     tough-cookie "~2.3.0"
     tunnel-agent "^0.6.0"
     uuid "^3.0.0"
-
-require-all@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/require-all/-/require-all-2.2.0.tgz#b4420c233ac0282d0ff49b277fb880a8b5de0894"
 
 require-directory@^2.1.1:
   version "2.1.1"
