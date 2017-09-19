@@ -43,10 +43,20 @@ class ClientHome extends Component {
         <AsideClient />
 
         <section>
-          <div className='user-header-box'>
-            <h1>{this.props.user.profile.displayName}</h1>
-            <p>Location: {this.props.user.profile.city}, {this.props.user.profile.state}</p>
-          </div>
+          {this.props.user.profile.displayName !== '' &&
+            this.props.user.profile.displayName != null &&
+              <div className='user-header-box'>
+                <h1>{this.props.user.profile.displayName}</h1>
+                <p>Location: {this.props.user.profile.city}, {this.props.user.profile.state}</p>
+              </div>
+          }
+
+          {this.props.user.profile.displayName === '' ||
+            this.props.user.profile.displayName == null &&
+              <div className='user-header-box'>
+                <h1>Please update your profile information</h1>
+              </div>
+          }
 
           <div className='pending-projects-box'>
             <h2>Active Projects:</h2>

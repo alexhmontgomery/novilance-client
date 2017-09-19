@@ -5,16 +5,17 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import config from '../config/main'
 
-class ProfileClientUpdate extends Component {
+class ProfileFreelancerUpdate extends Component {
   constructor (props) {
     super(props)
     this.state = {
       profile: '',
-      organization: '',
-      displayName: '',
+      givenName: '',
+      surname: '',
       description: '',
       city: '',
       state: '',
+      school: '',
       message: '',
       redirect: false
     }
@@ -35,14 +36,15 @@ class ProfileClientUpdate extends Component {
     event.preventDefault()
 
     this.props.startLoading()
-    fetch(`${config.server}/profile/client/update`, {
+    fetch(`${config.server}/profile/freelancer/update`, {
       method: 'PUT',
       body: JSON.stringify({
-        displayName: this.state.displayName,
-        organization: this.state.displayName,
+        givenName: this.state.givenName,
+        surname: this.state.surname,
         description: this.state.description,
         city: this.state.city,
-        state: this.state.state
+        state: this.state.state,
+        school: this.state.school
       }),
       headers: {
         'content-type': 'application/json',
@@ -55,10 +57,10 @@ class ProfileClientUpdate extends Component {
       if (json.success === true) {
         console.log('successfully update user profile')
         this.setState({
-          profile: json.client,
+          profile: json.freelancer,
           message: json.message
         })
-        this.props.updateUserProfile(json.client)
+        this.props.updateUserProfile(json.freelancer)
       } else {
         // Display error messages
         this.setState({
@@ -74,7 +76,7 @@ class ProfileClientUpdate extends Component {
   componentDidMount () {
     this.props.startLoading()
 
-    fetch(`${config.server}/profile/client/${this.props.user.profile.id}`, {
+    fetch(`${config.server}/profile/freelancer/${this.props.user.profile.id}`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -85,11 +87,12 @@ class ProfileClientUpdate extends Component {
     .then(json => {
       console.log(json)
       this.setState({
-        organization: json.client.organization,
-        displayName: json.client.displayName,
-        description: json.client.description,
-        city: json.client.city,
-        state: json.client.state
+        givenName: json.freelancer.givenName,
+        surname: json.freelancer.surname,
+        description: json.freelancer.description,
+        city: json.freelancer.city,
+        state: json.freelancer.state,
+        school: json.freelancer.school
       })
     })
     .then(() => {
@@ -108,7 +111,7 @@ class ProfileClientUpdate extends Component {
 
         <div className='profile-update-box'>
 
-          <h1>Client Profile Update</h1>
+          <h1>Freelancer Profile Update</h1>
 
           {this.state.message &&
           <div>
@@ -118,18 +121,18 @@ class ProfileClientUpdate extends Component {
 
           <form className='profile-edit-form' onSubmit={this.handleProfileEdit}>
             <div>
-              <label>Your Company Name *</label><br />
-              <input type='text' name='displayName' onChange={this.handleInputChange} value={this.state.displayName} />
+              <label>First Name *</label><br />
+              <input type='text' name='givenName' onChange={this.handleInputChange} value={this.state.givenName} />
             </div>
 
-            {/* <div>
-              <label>Organization Name for tax purposes (if different)</label><br />
-              <input type='text' name='organization' onChange={this.handleInputChange} value={this.state.organization} />
-            </div> */}
+            <div>
+              <label>Last Name *</label><br />
+              <input type='text' name='surname' onChange={this.handleInputChange} value={this.state.surname} />
+            </div>
 
             <div>
-              <label>Description of Your Company</label><br />
-              <textarea name='description' onChange={this.handleInputChange} value={this.state.description} rows='5' />
+              <label>Your Job Title (i.e. Web Developer or Graphic Designer)</label><br />
+              <input type='text' name='description' onChange={this.handleInputChange} value={this.state.description} />
             </div>
 
             <div>
@@ -195,6 +198,11 @@ class ProfileClientUpdate extends Component {
               </div>
             </div>
 
+            <div>
+              <label>School *</label><br />
+              <input type='text' name='school' onChange={this.handleInputChange} value={this.state.school} />
+            </div>
+
             <button type='submit'>Update Profile</button>
           </form>
 
@@ -220,4 +228,4 @@ function mapDispatchToProps (dispatch) {
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileClientUpdate)
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileFreelancerUpdate)

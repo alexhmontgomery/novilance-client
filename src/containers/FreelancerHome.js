@@ -43,11 +43,24 @@ class FreelancerHome extends Component {
         <AsideFreelancer />
 
         <section>
-          <div className='user-header-box'>
-            <h1>{this.props.user.profile.givenName} {this.props.user.profile.surname}</h1>
-            <p><em>{this.props.user.profile.description}</em></p>
-            <p>Location: {this.props.user.profile.city}, {this.props.user.profile.state}</p>
-          </div>
+
+          {this.props.user.profile.surname !== '' &&
+            this.props.user.profile.surname != null &&
+              <div className='user-header-box'>
+                <h1>{this.props.user.profile.givenName} {this.props.user.profile.surname}</h1>
+                <p><em>{this.props.user.profile.description}</em></p>
+                {this.props.user.profile.city !== '' &&
+                  <p>Location: {this.props.user.profile.city}, {this.props.user.profile.state}</p>
+                }
+              </div>
+          }
+
+          {this.props.user.profile.surname === '' ||
+             this.props.user.profile.surname == null &&
+             <div className='user-header-box'>
+               <h1>Please update your profile information</h1>
+             </div>
+          }
 
           <div className='pending-projects-box'>
             <h2>Pending Projects:</h2>

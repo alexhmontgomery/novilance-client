@@ -12,7 +12,7 @@ export default class AsideFreelancer extends Component {
           <Link to='/projects'>> My Projects</Link>
         </div>
         <div className='aside-link'>
-          <Link to='/projects'>> Edit Profile</Link>
+          <Link to='/profile/update'>> Edit Profile</Link>
         </div>
         <div className='aside-link'>
           <Link to='/projects'>> Settings</Link>

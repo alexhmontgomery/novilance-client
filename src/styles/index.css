@@ -248,7 +248,7 @@ main {
 /*//////////////////
 Profile Page
 //////////////////*/
-#profile-page {
+#profile-page, #profile-update-page {
   display: flex;
   flex-direction: row;
 }
