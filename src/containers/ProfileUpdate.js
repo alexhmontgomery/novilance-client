@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import AsideClient from '../components/AsideClient'
-import AsideFreelancer from '../components/AsideFreelancer'
+import Aside from '../containers/Aside'
 import ProfileClientUpdate from '../containers/ProfileClientUpdate'
 import ProfileFreelancerUpdate from '../containers/ProfileFreelancerUpdate'
 import { Link } from 'react-router-dom'
@@ -44,14 +43,14 @@ class ProfileUpdate extends Component {
     if (this.props.user.profile.role === 'client') {
       return (
         <main id='profile-update-page'>
-          <AsideClient />
+          <Aside />
           <ProfileClientUpdate />
         </main>
       )
     } else if (this.props.user.profile.role === 'freelancer') {
       return (
         <main id='profile-update-page'>
-          <AsideFreelancer />
+          <Aside />
           <ProfileFreelancerUpdate />
         </main>
       )

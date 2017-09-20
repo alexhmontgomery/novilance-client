@@ -21,7 +21,7 @@ class Project extends Component {
 
     const projectId = this.props.projectId
 
-    fetch(`http://0.0.0.0:5000/project/${projectId}`, {
+    fetch(`http://0.0.0.0:5000/projects/${projectId}`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',

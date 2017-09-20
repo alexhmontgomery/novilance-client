@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
 import { startLoading, stopLoading } from '../actions/index'
 import config from '../config/main'
+import Interest from './Interest'
+import Aside from './Aside'
 
 class Projects extends Component {
   constructor (props) {
@@ -17,7 +19,7 @@ class Projects extends Component {
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
-    this.handleJobSearch = this.handleJobSearch.bind(this)
+    this.handleProjectSearch = this.handleProjectSearch.bind(this)
   }
 
   handleInputChange (event) {
@@ -29,7 +31,7 @@ class Projects extends Component {
     })
   }
 
-  handleJobSearch (event) {
+  handleProjectSearch (event) {
     event.preventDefault()
 
     fetch(`${config.server}/projects/search?key=${this.state.searchKey}&value=${this.state.searchValue}`, {
@@ -72,10 +74,11 @@ class Projects extends Component {
 
   render () {
     return (
-      <main id='projects-page'>
-        This is all of the projects
-        <div>
-          <form onSubmit={this.handleJobSearch}>
+      <main id='projects-search-page'>
+        <Aside />
+
+        <section>
+          <form className='projects-search-box' onSubmit={this.handleProjectSearch}>
             <input type='text' name='searchValue' onChange={this.handleInputChange} value={this.state.searchValue} placeholder='Search projects' />
             <select type='text' name='searchKey' onChange={this.handleInputChange} value={this.state.searchKey}>
               <option value='type'>Project Type</option>
@@ -83,33 +86,47 @@ class Projects extends Component {
               <option value='client'>Client</option>
               <option value='description'>Description</option>
             </select>
-            <button type='submit'>Search Jobs</button>
+            <button type='submit'>Search Projects</button>
           </form>
-        </div>
 
-        <div>
-          <h2>Project List:</h2>
-
-          {this.state.projects.map((project) =>
-            <div key={project.id}>
-              <Link to={`/projects/view/${project.id}`}><h3>Title: {project.name}</h3></Link>
-              <p>Client: {project.client.displayName}</p>
-              <p>Type: {project.type}</p>
-              <p>Description: {project.description}</p>
-              {project.interest.map((interestEach) =>
-                interestEach.freelancerId === this.props.user.profile.id &&
-                <div>INTERESTED</div>
-              )}
-              {/* {project.interest.id &&
-                <div>
-                  INTERESTED
+          <div className='projects-display-box'>
+            {this.state.projects.map((project) =>
+              <div className='projects-map' key={project.id}>
+                <div className='projects-map-info'>
+                  <h3><Link to={`/projects/view/${project.id}`}><b>{project.name}</b></Link></h3>
+                  <p><i>{project.client.displayName}</i></p>
+                  <p>{project.description}</p>
+                  <div className='projects-map-info-rate'>
+                    <p>{project.type}</p>
+                    <p>${project.rate} / hr</p>
+                  </div>
                 </div>
-              } */}
-              <p>--------------------------</p>
-            </div>
-          )}
-        </div>
+
+                {(this.props.user.profile.role === 'freelancer')
+                ? (<div className='projects-map-buttons'>
+                  {project.interest.length === 0 &&
+                  <Interest currentProject={project} />
+                    }
+                  {project.interest.map((interestEach) =>
+                    <div key={interestEach.id}>
+                      {(interestEach.freelancerId === this.props.user.profile.id) ? (
+                        <div>Already interested</div>
+                      ) : (
+                        <Interest currentProject={project} />
+                      )}
+                    </div>
+                    )}
+                </div>)
+                : (
+                  <div className='projects-map-buttons' />
+                )}
+
+              </div>
+            )}
+          </div>
+        </section>
       </main>
+
     )
   }
 }

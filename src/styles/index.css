@@ -248,7 +248,7 @@ main {
 /*//////////////////
 Profile Page
 //////////////////*/
-#profile-page, #profile-update-page {
+#profile-page, #profile-update-page, #projects-search-page {
   display: flex;
   flex-direction: row;
 }
@@ -271,7 +271,7 @@ aside {
 }
 
 .aside-link a {
-    color: #333333;
+  color: #333333;
 }
 
 section {
@@ -309,4 +309,79 @@ section {
 
 .pending-projects-table td {
   border-bottom: 1px solid grey;
+}
+
+.projects-search-box, .projects-display-box {
+  background-color: #FFFFFF;
+  border: 1px solid grey;
+  width: 100%;
+  padding: 20px;
+  margin: 20px 0px;
+}
+
+.projects-search-box {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.projects-search-box input {
+  flex-basis: 60%;
+  margin: 0px 10px;
+}
+
+.projects-search-box select {
+  flex-basis: 25%;
+  margin: 0px 10px;
+}
+
+.projects-search-box button {
+  flex-basis: 15%;
+  margin: 0px 10px;
+}
+
+.projects-map {
+  padding: 10px;
+  border-bottom: 1px solid grey;
+  display: flex;
+  flex-direction: row;
+}
+
+.projects-map-info {
+  width: 100%;
+  padding: 10px;
+  flex-basis: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  text-align: left;
+}
+
+.projects-map-info h3, .projects-map-info p {
+  padding: 0px 0px 4px 0px;
+  width: 100%;
+}
+
+.projects-map-info-rate {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.projects-map-buttons {
+  padding: 10px;
+  flex-basis: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.interest-button {
+  background-color: rgb(56, 189, 206);
+  color: #FFFFFF;
+  border: 1px solid grey;
 }

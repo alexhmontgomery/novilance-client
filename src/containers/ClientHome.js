@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import AsideClient from '../components/AsideClient'
+import Aside from '../containers/Aside'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -40,7 +40,7 @@ class ClientHome extends Component {
   render () {
     return (
       <main id='profile-page'>
-        <AsideClient />
+        <Aside />
 
         <section>
           {this.props.user.profile.displayName !== '' &&
@@ -71,7 +71,7 @@ class ClientHome extends Component {
                 </tr>
                 {this.state.projects.map((project) =>
                   <tr key={project.id}>
-                    <td><Link to={`/project/${project.id}`}>{project.name}</Link></td>
+                    <td><Link to={`/projects/view/${project.id}`}>{project.name}</Link></td>
                     <td>{project.type}</td>
                     <td>{project.description}</td>
                     <td>{project.interest.length || 0}</td>

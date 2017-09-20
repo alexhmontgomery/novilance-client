@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import AsideFreelancer from '../components/AsideFreelancer'
+import Aside from '../containers/Aside'
 import config from '../config/main'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -40,7 +40,7 @@ class FreelancerHome extends Component {
   render () {
     return (
       <main id='profile-page'>
-        <AsideFreelancer />
+        <Aside />
 
         <section>
 

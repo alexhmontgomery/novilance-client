@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import config from '../config/main'
 
 class Interest extends Component {
   constructor (props) {
@@ -13,7 +14,7 @@ class Interest extends Component {
   }
 
   handleInterest (e) {
-    fetch(`http://0.0.0.0:5000/project/interest`, {
+    fetch(`${config.server}/project/interest`, {
       method: 'POST',
       body: JSON.stringify({
         projectId: this.props.currentProject.id
@@ -35,7 +36,7 @@ class Interest extends Component {
   render () {
     return (
       <div>
-        <button className={this.state.buttonClass} onClick={this.handleInterest}>Interested</button>
+        <button className='interest-button' onClick={this.handleInterest}>Interested</button>
       </div>
     )
   }
