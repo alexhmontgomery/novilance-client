@@ -3,12 +3,17 @@ import { Link, Redirect } from 'react-router-dom'
 import { startLoading, stopLoading, authenticateUser } from '../actions/index'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import SelectField from 'material-ui/SelectField'
+import MenuItem from 'material-ui/MenuItem'
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
+import Paper from 'material-ui/Paper'
 
 class Authenticate extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      selectedRole: 'freelancer', // default is freelancer
+      selectedRole: '', // default is freelancer
       email: '',
       password: '',
       message: '',
@@ -16,9 +21,14 @@ class Authenticate extends Component {
     }
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
+    this.handleRoleChange = this.handleRoleChange.bind(this)
   }
 
-  handleInputChange (event) {
+  handleRoleChange (event, index, value) {
+    this.setState({selectedRole: value})
+  }
+
+  handleInputChange (event, index) {
     const target = event.target
     const value = target.value
     const name = target.name
@@ -69,10 +79,11 @@ class Authenticate extends Component {
         <Redirect to={`/${this.props.user.profile.role}/home`} />
       )
     }
+    console.log(this.state)
     return (
       <main id='authenticate-page' >
         <div className='outer-border-box'>
-          <div className='login-container'>
+          <Paper className='login-container' zDepth={5}>
             <div className='login-title-box'>
               <h1>novilance</h1>
             </div>
@@ -85,25 +96,29 @@ class Authenticate extends Component {
 
             <form className='login-form' onSubmit={this.handleLogin}>
               <div>
-                <select name='selectedRole' value={this.state.selectedRole} onChange={this.handleInputChange}>
+                <SelectField className='login-select-field login-form-fields' floatingLabelText='Select Role' name='selectedRole' value={this.state.selectedRole} onChange={this.handleRoleChange}>
+                  <MenuItem value={'freelancer'} primaryText='Freelancer' />
+                  <MenuItem value={'client'} primaryText='Client' />
+                </SelectField>
+                {/* <select name='selectedRole' value={this.state.selectedRole} onChange={this.handleInputChange}>
                   <option value='freelancer'>Freelancer</option>
                   <option value='client'>Client</option>
-                </select>
+                </select> */}
               </div>
 
               <div>
-                <input type='email' name='email' onChange={this.handleInputChange} placeholder='Your email' value={this.state.email} />
+                <TextField className='login-form-fields' type='email' name='email' onChange={this.handleInputChange} floatingLabelText='Your email' value={this.state.email} />
               </div>
 
               <div>
-                <input type='password' name='password' onChange={this.handleInputChange} placeholder='Your password' value={this.state.password} />
+                <TextField className='login-form-fields' type='password' name='password' onChange={this.handleInputChange} floatingLabelText='Your password' value={this.state.password} />
               </div>
 
-              <button type='submit'>Login</button>
+              <RaisedButton className='login-form-button' type='submit' label='Login' primary fullWidth />
             </form>
 
             <p>Don't have an account? <Link className='login-link' to='/register'>Sign Up</Link></p>
-          </div>
+          </Paper>
         </div>
 
       </main>

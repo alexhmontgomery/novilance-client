@@ -4,13 +4,17 @@ import { startLoading, stopLoading, authenticateUser } from '../actions/index'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import config from '../config/main'
-// import { states } from 'countryjs'
+import SelectField from 'material-ui/SelectField'
+import MenuItem from 'material-ui/MenuItem'
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
+import Paper from 'material-ui/Paper'
 
 class Register extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      selectedRole: 'freelancer', // default is freelancer
+      selectedRole: '', // default is freelancer
       email: '',
       password: '',
       passwordConf: '',
@@ -19,6 +23,11 @@ class Register extends Component {
     }
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleRegistration = this.handleRegistration.bind(this)
+    this.handleRoleChange = this.handleRoleChange.bind(this)
+  }
+
+  handleRoleChange (event, index, value) {
+    this.setState({selectedRole: value})
   }
 
   handleInputChange (event) {
@@ -82,7 +91,7 @@ class Register extends Component {
     return (
       <main id='register-page' >
         <div className='outer-border-box'>
-          <div className='login-container'>
+          <Paper className='login-container' zDepth={5}>
             <div className='login-title-box'>
               <h1>novilance</h1>
             </div>
@@ -95,35 +104,29 @@ class Register extends Component {
 
             <form className='login-form' onSubmit={this.handleRegistration}>
               <div>
-                <label>Select your role:</label><br />
-                <select name='selectedRole' value={this.state.selectedRole} onChange={this.handleInputChange}>
-                  <option value='freelancer'>Freelancer</option>
-                  <option value='client'>Client</option>
-                  {/* {states('US').map((eachState) =>
-                    <option key={eachState} value={eachState}>{eachState}</option>
-                  )} */}
-                </select>
+                <SelectField className='login-select-field login-form-fields' floatingLabelText='Select Role' name='selectedRole' value={this.state.selectedRole} onChange={this.handleRoleChange}>
+                  <MenuItem value={'freelancer'} primaryText='Freelancer' />
+                  <MenuItem value={'client'} primaryText='Client' />
+                </SelectField>
               </div>
 
               <div>
-                <label>A valid email address is required</label><br />
-                <input type='email' name='email' onChange={this.handleInputChange} placeholder='Your email' value={this.state.email} />
+                <TextField className='login-form-fields' type='email' name='email' onChange={this.handleInputChange} floatingLabelText='Enter a valid email address' value={this.state.email} />
               </div>
 
               <div>
-                <label>Password must be 5-20 characters in length</label><br />
-                <input type='password' name='password' onChange={this.handleInputChange} placeholder='Create a password' value={this.state.password} />
+                <TextField className='login-form-fields' type='password' name='password' onChange={this.handleInputChange} floatingLabelText='Create a password of 5-20 characters' value={this.state.password} errorText={this.state.password.length < 5 || this.state.password.length > 20 && 'Password must be 5-20 characters'} />
               </div>
 
               <div>
-                <input type='password' name='passwordConf' onChange={this.handleInputChange} placeholder='Confirm your password' value={this.state.passwordConf} />
+                <TextField className='login-form-fields' type='password' name='passwordConf' onChange={this.handleInputChange} floatingLabelText='Confirm your password' value={this.state.passwordConf} errorText={this.state.passwordConf !== this.state.password && 'Passwords do not match'} />
               </div>
 
-              <button type='submit'>Register</button>
+              <RaisedButton className='login-form-button' type='submit' label='Register' primary fullWidth />
             </form>
 
             <p>Already have an account? <Link className='login-link' to='/authenicate'>Log In</Link></p>
-          </div>
+          </Paper>
         </div>
       </main>
     )
