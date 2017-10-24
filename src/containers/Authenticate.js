@@ -100,10 +100,6 @@ class Authenticate extends Component {
                   <MenuItem value={'freelancer'} primaryText='Freelancer' />
                   <MenuItem value={'client'} primaryText='Client' />
                 </SelectField>
-                {/* <select name='selectedRole' value={this.state.selectedRole} onChange={this.handleInputChange}>
-                  <option value='freelancer'>Freelancer</option>
-                  <option value='client'>Client</option>
-                </select> */}
               </div>
 
               <div>

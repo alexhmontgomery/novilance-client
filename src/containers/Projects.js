@@ -50,7 +50,7 @@ class Projects extends Component {
     })
   }
 
-  componentDidMount () {
+  componentWillMount () {
     this.props.startLoading()
 
     fetch(`${config.server}/projects/all`, {
@@ -102,24 +102,7 @@ class Projects extends Component {
                   </div>
                 </div>
 
-                {(this.props.user.profile.role === 'freelancer')
-                ? (<div className='projects-map-buttons'>
-                  {project.interest.length === 0 &&
-                  <Interest currentProject={project} />
-                    }
-                  {project.interest.map((interestEach) =>
-                    <div key={interestEach.id}>
-                      {(interestEach.freelancerId === this.props.user.profile.id) ? (
-                        <div>Already interested</div>
-                      ) : (
-                        <Interest currentProject={project} />
-                      )}
-                    </div>
-                    )}
-                </div>)
-                : (
-                  <div className='projects-map-buttons' />
-                )}
+                <Interest currentProject={project} />
 
               </div>
             )}

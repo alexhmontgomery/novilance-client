@@ -250,7 +250,7 @@ main {
 /*//////////////////
 Profile Page
 //////////////////*/
-#profile-page, #profile-update-page, #projects-search-page {
+#profile-page, #profile-update-page, #projects-search-page, #project-create-page {
   display: flex;
   flex-direction: row;
 }
@@ -267,13 +267,14 @@ aside {
 }
 
 .aside-link {
-  padding: 15px;
+  font-size: 0.9em !important;
+  color: purple;
+  /*padding: 15px;
   width: 100%;
-  border-bottom: 1px solid #333333;
+  border-bottom: 1px solid #333333;*/
 }
 
-.aside-link a {
-  color: #333333;
+.aside-icon {
 }
 
 section {
@@ -386,4 +387,15 @@ section {
   background-color: rgb(56, 189, 206);
   color: #FFFFFF;
   border: 1px solid grey;
+}
+
+.project-create-container {
+  width: 100%;
+  margin: 10px;
+  padding: 10px;
+}
+
+.project-create-container form input, .project-create-container form textarea {
+  width: 100%;
+  font-size: 1.2em;
 }

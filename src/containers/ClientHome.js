@@ -5,6 +5,15 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { startLoading, stopLoading } from '../actions/index'
 import config from '../config/main'
+import Paper from 'material-ui/Paper'
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn
+} from 'material-ui/Table'
 
 class ClientHome extends Component {
   constructor (props) {
@@ -45,41 +54,43 @@ class ClientHome extends Component {
         <section>
           {this.props.user.profile.displayName !== '' &&
             this.props.user.profile.displayName != null &&
-              <div className='user-header-box'>
+              <Paper className='user-header-box' zDepth={2} >
                 <h1>{this.props.user.profile.displayName}</h1>
                 <p>Location: {this.props.user.profile.city}, {this.props.user.profile.state}</p>
-              </div>
+              </Paper>
           }
 
           {this.props.user.profile.displayName === '' ||
             this.props.user.profile.displayName == null &&
-              <div className='user-header-box'>
+              <Paper className='user-header-box' zDepth={2} >
                 <h1>Please update your profile information</h1>
-              </div>
+              </Paper>
           }
 
-          <div className='pending-projects-box'>
+          <Paper className='pending-projects-box' zDepth={2} >
             <h2>Active Projects:</h2>
 
-            <table className='pending-projects-table'>
-              <tbody>
-                <tr>
-                  <th>Project</th>
-                  <th>Type</th>
-                  <th>Description</th>
-                  <th>Prospects</th>
-                </tr>
+            <Table className='pending-projects-table'>
+              <TableHeader displaySelectAll={false} >
+                <TableRow>
+                  <TableHeaderColumn>Project</TableHeaderColumn>
+                  <TableHeaderColumn>Type</TableHeaderColumn>
+                  <TableHeaderColumn>Description</TableHeaderColumn>
+                  <TableHeaderColumn>Prospects</TableHeaderColumn>
+                </TableRow>
+              </TableHeader>
+              <TableBody displayRowCheckbox={false} stripedRows >
                 {this.state.projects.map((project) =>
-                  <tr key={project.id}>
-                    <td><Link to={`/projects/view/${project.id}`}>{project.name}</Link></td>
-                    <td>{project.type}</td>
-                    <td>{project.description}</td>
-                    <td>{project.interest.length || 0}</td>
-                  </tr>
+                  <TableRow key={project.id}>
+                    <TableRowColumn><Link to={`/projects/view/${project.id}`}>{project.name}</Link></TableRowColumn>
+                    <TableRowColumn>{project.type}</TableRowColumn>
+                    <TableRowColumn>{project.description}</TableRowColumn>
+                    <TableRowColumn>{project.interest.length || 0}</TableRowColumn>
+                  </TableRow>
                 )}
-              </tbody>
-            </table>
-          </div>
+              </TableBody>
+            </Table>
+          </Paper>
 
         </section>
       </main>

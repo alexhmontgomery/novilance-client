@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import UserOptions from '../containers/UserOptions'
+import Aside from '../containers/Aside'
 import { NavLink } from 'react-router-dom'
 
 export default class BaseLayout extends Component {
@@ -12,7 +13,11 @@ export default class BaseLayout extends Component {
           <UserOptions />
         </nav>
 
-        { this.props.children }
+        <main>
+          {/* <Aside /> */}
+          { this.props.children }
+
+        </main>
 
         <footer>
           {/* Insert footer here. */}

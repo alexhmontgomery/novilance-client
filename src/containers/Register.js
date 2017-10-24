@@ -14,7 +14,7 @@ class Register extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      selectedRole: '', // default is freelancer
+      selectedRole: '',
       email: '',
       password: '',
       passwordConf: '',

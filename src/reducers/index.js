@@ -77,7 +77,7 @@ const projectReducer = (state = initialProjectState, action) => {
 const reducer = combineReducers({
   loading: loadingReducer,
   user: userReducer,
-  project: projectReducer
+  projectReducer: projectReducer
 })
 
 export default reducer
