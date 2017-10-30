@@ -8,13 +8,21 @@ import { startLoading, stopLoading } from '../actions/index'
 import Aside from './Aside'
 import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn
+} from 'material-ui/Table'
 
 class Project extends Component {
   constructor (props) {
     super(props)
     this.state = {
       project: '',
-      interests: '',
+      interests: [],
       client: '',
       isInterested: false
     }
@@ -84,22 +92,22 @@ class Project extends Component {
       switch (this.props.user.profile.role) {
         case 'freelancer':
           return (
-            <main id='project-page'>
+            <main id='project-view-page'>
               <Aside />
               <section>
-                <Paper zDepth={2}>
-                  <div className='project-header-name'>
+                <Paper zDepth={2} className='project-view-header'>
+                  <div className='project-view-name'>
                     <h1>{this.state.project.name}</h1>
                     <h3><em>{this.state.client.displayName}</em></h3>
                   </div>
-                  <div>
+                  <div className='project-view-rate'>
                     <p>{this.state.project.type}</p>
                     <p>${this.state.project.rate} / hr</p>
                   </div>
                 </Paper>
 
-                <Paper zDepth={2}>
-                  <h3>Scope of Work</h3>
+                <Paper zDepth={2} className='project-view-description'>
+                  <p className='primary-text-color'>Scope of Work</p>
                   <p>{this.state.project.description}</p>
                 </Paper>
 
@@ -115,28 +123,46 @@ class Project extends Component {
           )
         case 'client':
           return (
-            <main id='project-page'>
+            <main id='project-view-page'>
               <Aside />
               <section>
-                <Paper zDepth={2}>
-                  <div className='project-header-name'>
+                <Paper zDepth={2} className='project-view-header'>
+                  <div className='project-view-name'>
                     <h1>{this.state.project.name}</h1>
                     <h3><em>{this.state.client.displayName}</em></h3>
                   </div>
-                  <div>
+                  <div className='project-view-rate'>
                     <p>{this.state.project.type}</p>
                     <p>${this.state.project.rate} / hr</p>
                   </div>
                 </Paper>
 
-                <Paper zDepth={2}>
-                  <h3>Scope of Work</h3>
+                <Paper zDepth={2} className='project-view-description'>
+                  <p className='primary-text-color'>Scope of Work</p>
                   <p>{this.state.project.description}</p>
                 </Paper>
 
-                <div>
-                    You are a client
-                </div>
+                <Paper className='project-view-prospect-box' zDepth={2} >
+                  <p className='primary-text-color'><u>Propsects</u></p>
+                  <Table className='project-view-prospect-table'>
+                    <TableHeader displaySelectAll={false} adjustForCheckbox={false} >
+                      <TableRow>
+                        <TableHeaderColumn style={{width: 50}}>#</TableHeaderColumn>
+                        <TableHeaderColumn style={{textAlign: 'center'}}>Name</TableHeaderColumn>
+                        <TableHeaderColumn style={{textAlign: 'center'}}>Status</TableHeaderColumn>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody displayRowCheckbox={false} stripedRows >
+                      {this.state.interests.map((interest, index) =>
+                        <TableRow key={interest.freelancerId}>
+                          <TableRowColumn style={{width: 50}}>{index + 1}</TableRowColumn>
+                          <TableRowColumn style={{textAlign: 'center'}}>{interest.freelancer.givenName} {interest.freelancer.surname}</TableRowColumn>
+                          <TableRowColumn style={{textAlign: 'center'}}>candidate</TableRowColumn>
+                        </TableRow>
+                      )}
+                    </TableBody>
+                  </Table>
+                </Paper>
               </section>
             </main>
           )
@@ -145,20 +171,6 @@ class Project extends Component {
       }
     }
   }
-
-  // componentDidMount () {
-  //   // Check if freelancer is intersted in the project
-  //   let interestLength = this.state.interests.length
-  //   if (this.props.user.profile.role === 'freelancer') {
-  //     for (var i = 0; i < interestLength; i++) {
-  //       if (
-  //         this.state.interests[i].freelancerId === this.props.user.profile.id
-  //       ) {
-  //         this.setState({isInterested: true})
-  //       }
-  //     }
-  //   }
-  // }
 
 }
 

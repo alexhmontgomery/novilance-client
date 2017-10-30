@@ -75,7 +75,7 @@ class FreelancerHome extends Component {
             <h2>Pending Projects:</h2>
 
             <Table className='pending-projects-table'>
-              <TableHeader displaySelectAll={false} >
+              <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                 <TableRow>
                   <TableHeaderColumn>Project</TableHeaderColumn>
                   <TableHeaderColumn>Type</TableHeaderColumn>

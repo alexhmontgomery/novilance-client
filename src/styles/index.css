@@ -20,6 +20,10 @@ a {
   cursor: pointer;
 }
 
+.primary-text-color {
+  color: rgb(56, 189, 206);
+}
+
 nav {
   height: 9vh;
   display: flex;
@@ -250,7 +254,7 @@ main {
 /*//////////////////
 Profile Page
 //////////////////*/
-#profile-page, #profile-update-page, #projects-search-page, #project-create-page {
+#profile-page, #profile-update-page, #projects-search-page, #project-create-page, #project-view-page {
   display: flex;
   flex-direction: row;
 }
@@ -295,8 +299,6 @@ section {
 .user-header-box h1 {
   color: rgb(56, 189, 206)
 }
-
-
 
 .pending-projects-box h2 {
   color: rgb(56, 189, 206)
@@ -398,4 +400,46 @@ section {
 .project-create-container form input, .project-create-container form textarea {
   width: 100%;
   font-size: 1.2em;
+}
+
+/*---Project View Page---*/
+#project-view-page section {
+  padding: 20px 75px;
+}
+
+.project-view-header, .project-view-description {
+  background-color: #FFFFFF;
+  border: 1px solid grey;
+  width: 100%;
+  padding: 20px;
+  margin: 20px 0px;
+}
+
+.project-view-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-view-name {
+  text-align: center;
+}
+
+.project-view-rate {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 20px;
+}
+
+.project-view-rate p {
+  margin: 0%;
+  padding: 0%;
+}
+
+.project-view-prospect-box {
+  text-align: center;
+  padding: 25px;
+  margin: 25px 75px;
 }

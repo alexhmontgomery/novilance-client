@@ -8,7 +8,7 @@ import config from '../config/main'
 import Interest from './Interest'
 import Aside from './Aside'
 
-class Projects extends Component {
+class ProjectSearch extends Component {
   constructor (props) {
     super(props)
 
@@ -127,4 +127,4 @@ function mapDispatchToProps (dispatch) {
   }, dispatch)
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Projects))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProjectSearch))

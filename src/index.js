@@ -13,7 +13,7 @@ import Register from './containers/Register'
 import Authenticate from './containers/Authenticate'
 import FreelancerHome from './containers/FreelancerHome'
 import ClientHome from './containers/ClientHome'
-import Projects from './containers/Projects'
+import ProjectSearch from './containers/ProjectSearch'
 import Project from './containers/Project'
 import ProjectCreate from './containers/ProjectCreate'
 import ProfileUpdate from './containers/ProfileUpdate'
@@ -35,7 +35,7 @@ ReactDOM.render(
             <Route path='/authenticate' component={Authenticate} />
             <Route path='/freelancer/home' component={FreelancerHome} />
             <Route path='/client/home' component={ClientHome} />
-            <Route path='/projects/search/' component={Projects} />
+            <Route path='/projects/search/' component={ProjectSearch} />
             <Route path='/projects/create' component={ProjectCreate} />
             <Route path='/projects/view/:id' component={Project} />
             <Route path='/profile/update' component={ProfileUpdate} />

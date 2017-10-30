@@ -71,12 +71,12 @@ class ClientHome extends Component {
             <h2>Active Projects:</h2>
 
             <Table className='pending-projects-table'>
-              <TableHeader displaySelectAll={false} >
+              <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                 <TableRow>
                   <TableHeaderColumn>Project</TableHeaderColumn>
                   <TableHeaderColumn>Type</TableHeaderColumn>
                   <TableHeaderColumn>Description</TableHeaderColumn>
-                  <TableHeaderColumn>Prospects</TableHeaderColumn>
+                  <TableHeaderColumn style={{width: 150}}>Prospects</TableHeaderColumn>
                 </TableRow>
               </TableHeader>
               <TableBody displayRowCheckbox={false} stripedRows >
@@ -85,7 +85,7 @@ class ClientHome extends Component {
                     <TableRowColumn><Link to={`/projects/view/${project.id}`}>{project.name}</Link></TableRowColumn>
                     <TableRowColumn>{project.type}</TableRowColumn>
                     <TableRowColumn>{project.description}</TableRowColumn>
-                    <TableRowColumn>{project.interest.length || 0}</TableRowColumn>
+                    <TableRowColumn style={{width: 150}}>{project.interest.length || 0}</TableRowColumn>
                   </TableRow>
                 )}
               </TableBody>
